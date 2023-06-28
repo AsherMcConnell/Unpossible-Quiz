@@ -40,11 +40,21 @@ class QuizViewModel: ObservableObject {
                      Answer(answerText: "45,103,150", color: "green", correctAnswer: false),
                      Answer(answerText: "1", color: "red", correctAnswer: false),
                      Answer(answerText: "IDK", color: "yellow", correctAnswer: false)].shuffled()),
-        Question(questionText: "Scroll Question", answers: [])
+        Question(questionText: "Scroll Question", answers: []),
+        Question(questionText: "What bird can lift the most weight?", answers:
+                    [Answer(answerText: "Crane", color: "blue", correctAnswer: true),
+                     Answer(answerText: "Canary", color: "yellow", correctAnswer: false),
+                     Answer(answerText: "Angry Bird", color: "red", correctAnswer: false),
+                     Answer(answerText: "Flappy Bird", color: "green", correctAnswer: false)]),
+        Question(questionText: "What has 4 wheels and flies?", answers:
+                    [Answer(answerText: "garbageTruck", color: "red", correctAnswer: true),
+                     Answer(answerText: "airplane", color: "green", correctAnswer: false),
+                     Answer(answerText: "schoolBus", color: "yellow", correctAnswer: false),
+                     Answer(answerText: "helicopter", color: "blue", correctAnswer: false)])
     ]
     
     func nextQuestion() {
-        if questionNum <= 3 {
+        if questionNum <= 5 {
             questionNum += 1
             currentQuestion = questionDataDefault[questionNum]
         }

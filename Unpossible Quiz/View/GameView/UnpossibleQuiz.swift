@@ -10,7 +10,9 @@ import SwiftUI
 struct UnpossibleQuiz: View {
     
     @ObservedObject var quizVM = QuizViewModel()
-    @State var sliderValue: Double = 1
+    @State var sliderValue: Double = 0
+    @State var sliderColor: String = "red"
+
     
     var body: some View {
         ZStack {
@@ -21,8 +23,6 @@ struct UnpossibleQuiz: View {
                     questionRainbow
                 } else if quizVM.questionNum == 4 {
                     questionSlider
-                } else if quizVM.questionNum == 6 {
-                    questionSlider
                 } else {
                     defaultQuestionTitle
                 }
@@ -30,7 +30,10 @@ struct UnpossibleQuiz: View {
                 Spacer()
                 answersShape
                 Spacer()
-                lives
+                if quizVM.questionNum == 4 {
+                } else {
+                    lives
+                }
             }
         }
     }
@@ -85,7 +88,7 @@ extension UnpossibleQuiz {
 // MARK: SliderConstants
 
 extension UnpossibleQuiz {
-    private struct Slip{
+    private struct Slip {
         
         // MARK: - COLOR
         
@@ -222,9 +225,34 @@ extension UnpossibleQuiz {
                 }
                 Slider(value: $sliderValue, in: 0...4, step: 1.0)
                     .padding()
+                FlowLayout {
+                    
+                    Button {
+                        quizVM.nextQuestion()
+                    } label: {
+                        Image("Limage")
+                            .resizable()
+                            .frame(width: 30, height: 45)
+                            .padding(.trailing, 2)
+                    }
+                    
+                    Image("ivesimage")
+                        .resizable()
+                        .frame(width: 110, height: 45)
+                        
+                    
+                    Image(Constants.livesArray[quizVM.lives])
+                        .resizable()
+                        .frame(width: 40, height: 45)
+                    Text("")
+                        .frame(width: 200)
+            
+                    
+                }
             }
         }
     }
+    
     // MARK: - questionSliderViews
     
     var click1: some View {
@@ -385,14 +413,28 @@ extension UnpossibleQuiz {
         LazyVGrid(columns: Constants.columns) {
             ForEach(quizVM.currentQuestion.answers, id: \.self) { answer in
                 ZStack {
-                    Text(answer.answerText)
-                        .foregroundColor(.white)
-                        .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
-                        .font(.custom(Constants.drawFont, size: 40))
-                        .zIndex(5)
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundColor(Color(answer.color))
-                        .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
+                    if quizVM.questionNum == 6 {
+                        ZStack {
+                            Image(answer.answerText)
+                                .resizable()
+                                .frame(width: 160, height: 160)
+                                .scaledToFill()
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(Color(answer.color))
+                                .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
+                                .zIndex(-1)
+                        }
+                        
+                    } else {
+                        Text(answer.answerText)
+                            .foregroundColor(.white)
+                            .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
+                            .font(.custom(Constants.drawFont, size: 40))
+                            .zIndex(5)
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(Color(answer.color))
+                            .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
+                    }
                 }
                 .onTapGesture {
                     if !answer.correctAnswer && quizVM.lives <= 1 {
