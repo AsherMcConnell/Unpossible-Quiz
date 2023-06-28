@@ -13,7 +13,7 @@ struct HomeScreen: View {
     @StateObject var quizVM = QuizViewModel()
     
     @NavRouter var navRouter
-    @State var backgroundIsAnimating = true
+    @State var backgroundIsAnimating: Bool? = nil
     
     var body: some View {
         ZStack {
@@ -27,11 +27,13 @@ struct HomeScreen: View {
                 startCreditsSettings
                 Spacer()
             }
+           
         }
         .onAppear {
             withAnimation {
-                backgroundIsAnimating.toggle()
-
+                if backgroundIsAnimating == nil {
+                    backgroundIsAnimating = false
+                }
             }
         }
     }
@@ -116,9 +118,9 @@ extension HomeScreen {
                                 .opacity(0.7)
                                 .foregroundColor(Color(color))
                                 .frame(width: 100, height: 20)
-                                .offset(x: backgroundIsAnimating ? -150 : 179)
+                                .offset(x: backgroundIsAnimating ?? true ? -150 : 179)
                                 .animation(.linear(duration: 6).repeatForever(autoreverses: false), value: backgroundIsAnimating)
-                                .rotationEffect(.degrees(backgroundIsAnimating ? 10 : -10))
+                                .rotationEffect(.degrees(backgroundIsAnimating ?? true ? 10 : -10))
                                 .animation(.linear(duration: 6).repeatForever(autoreverses: true), value: backgroundIsAnimating)
                         }
                     }

@@ -15,10 +15,16 @@ struct UnpossibleQuiz: View {
     @ObservedObject var quizVM = QuizViewModel()
     @State var sliderValue: Double = 0
     @State var sliderColor: String = "red"
+    
+    @NavRouter var navRouter
+    
+    @State var gameOverActive: Bool = false
 
     
     var body: some View {
         ZStack {
+            gameOver
+                .zIndex(10)
             VStack {
                 if quizVM.questionNum == 0 {
                     questionIncorrectly
@@ -38,6 +44,8 @@ struct UnpossibleQuiz: View {
                     lives
                 }
             }
+            .blur(radius: gameOverActive ? 10 : 0)
+            .animation(.linear(duration: 0.7), value: gameOverActive)
         }
         .fullScreenCover(isPresented: $showScreen) {
             GameOver()
@@ -159,6 +167,26 @@ extension UnpossibleQuiz {
                 .frame(width: 40)
             Spacer()
         }.frame(height: 50)
+    }
+    
+    var gameOver: some View {
+        ZStack {
+            VStack {
+                Image("gameOver")
+                    .resizable()
+                    .frame(width: gameOverActive ? 300 : 0, height: gameOverActive ? 400 : 0)
+                    .rotationEffect(.degrees(-90))
+                Image("tryAgain")
+                    .resizable()
+                    .frame(width:gameOverActive ? 130 : 0, height: gameOverActive ? 200 : 0)
+                    .rotationEffect(.degrees(-90))
+                    .onTapGesture {
+                        navRouter.popToRoot()
+                    }
+            }
+            .animation(.spring(dampingFraction: 2.0 ,blendDuration: 20.0), value: gameOverActive)
+
+        }
     }
     
     // MARK: - QUESTION VIEWS
@@ -430,6 +458,7 @@ extension UnpossibleQuiz {
                             RoundedRectangle(cornerRadius: 15)
                                 .foregroundColor(Color(answer.color))
                                 .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
+                                .shadow(radius: 10)
                                 .zIndex(-1)
                         }
                         
@@ -441,12 +470,14 @@ extension UnpossibleQuiz {
                             .zIndex(5)
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundColor(Color(answer.color))
+                            .shadow(radius: 10)
                             .frame(width: Constants.answerShapeWidth, height: Constants.answerShapeHeight)
                     }
                 }
                 .onTapGesture {
                     if !answer.correctAnswer && quizVM.lives == 2 {
-                        showScreen.toggle()
+                        gameOverActive.toggle()
+//                        showScreen.toggle()
                         SoundManager.instance.playSound(sound: .gameOver)
                     } else if !answer.correctAnswer && quizVM.lives <= 1 {
                         SoundManager.instance.playSound(sound: .boomIncorrect)

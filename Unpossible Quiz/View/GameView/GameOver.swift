@@ -14,7 +14,7 @@ struct GameOver: View {
     
     var body: some View {
         ZStack {
-            Color.black
+            Color.clear
                 .ignoresSafeArea()
             VStack {
                 Image("gameOver")
