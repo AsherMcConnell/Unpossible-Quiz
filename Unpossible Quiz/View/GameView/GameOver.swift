@@ -6,15 +6,28 @@
 //
 
 import SwiftUI
+import NavigationRouter
 
 struct GameOver: View {
+    
+    @NavRouter var navRouter
+    
     var body: some View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
             VStack {
-                
-                    
+                Image("gameOver")
+                    .resizable()
+                    .frame(width: 300, height: 400)
+                    .rotationEffect(.degrees(-90))
+                Image("tryAgain")
+                    .resizable()
+                    .frame(width: 130, height: 200)
+                    .rotationEffect(.degrees(-90))
+                    .onTapGesture {
+                        navRouter.popToRoot()
+                    }
             }
         }
     }

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import NavigationRouter
 
 struct UnpossibleQuiz: View {
+    
+    @State var showScreen: Bool = false
     
     @ObservedObject var quizVM = QuizViewModel()
     @State var sliderValue: Double = 0
@@ -35,6 +38,9 @@ struct UnpossibleQuiz: View {
                     lives
                 }
             }
+        }
+        .fullScreenCover(isPresented: $showScreen) {
+            GameOver()
         }
     }
 }
@@ -164,6 +170,7 @@ extension UnpossibleQuiz {
                 Text(word.1 + " ")
             }
             Button {
+                SoundManager.instance.playSound(sound: .dingCorrect)
                 quizVM.nextQuestion()
             } label: {
                 Text(Constants.questionIncorrectlyButtonText + " ")
@@ -182,6 +189,7 @@ extension UnpossibleQuiz {
         FlowLayout {
             numOfQuestion
             Button {
+                SoundManager.instance.playSound(sound: .dingCorrect)
                 quizVM.nextQuestion()
             } label: {
                 Text(Constants.questionRainbowButtonText)
@@ -226,8 +234,8 @@ extension UnpossibleQuiz {
                 Slider(value: $sliderValue, in: 0...4, step: 1.0)
                     .padding()
                 FlowLayout {
-                    
                     Button {
+                        SoundManager.instance.playSound(sound: .dingCorrect)
                         quizVM.nextQuestion()
                     } label: {
                         Image("Limage")
@@ -438,7 +446,7 @@ extension UnpossibleQuiz {
                 }
                 .onTapGesture {
                     if !answer.correctAnswer && quizVM.lives == 2 {
-                        
+                        showScreen.toggle()
                         SoundManager.instance.playSound(sound: .gameOver)
                     } else if !answer.correctAnswer && quizVM.lives <= 1 {
                         SoundManager.instance.playSound(sound: .boomIncorrect)
