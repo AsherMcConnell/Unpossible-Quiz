@@ -437,9 +437,14 @@ extension UnpossibleQuiz {
                     }
                 }
                 .onTapGesture {
-                    if !answer.correctAnswer && quizVM.lives <= 1 {
+                    if !answer.correctAnswer && quizVM.lives == 2 {
+                        
+                        SoundManager.instance.playSound(sound: .gameOver)
+                    } else if !answer.correctAnswer && quizVM.lives <= 1 {
+                        SoundManager.instance.playSound(sound: .boomIncorrect)
                         quizVM.lives += 1
                     } else {
+                        SoundManager.instance.playSound(sound: .dingCorrect)
                         quizVM.nextQuestion()
                     }
                 }

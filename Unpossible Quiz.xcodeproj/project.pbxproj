@@ -23,6 +23,10 @@
 		FAA417022A4A470200C43DDA /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA417012A4A470200C43DDA /* Question.swift */; };
 		FAA417042A4A47A900C43DDA /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA417032A4A47A900C43DDA /* QuizViewModel.swift */; };
 		FAA417092A4CC96100C43DDA /* SoundManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA417082A4CC96100C43DDA /* SoundManger.swift */; };
+		FAA4170B2A4CCEEB00C43DDA /* dingCorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */; };
+		FAA4170D2A4CD03500C43DDA /* boomIncorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */; };
+		FAA4170F2A4CD15B00C43DDA /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170E2A4CD15B00C43DDA /* gameOver.wav */; };
+		FAA417112A4CD56700C43DDA /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA417102A4CD56700C43DDA /* GameOver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		FAA417012A4A470200C43DDA /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		FAA417032A4A47A900C43DDA /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		FAA417082A4CC96100C43DDA /* SoundManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManger.swift; sourceTree = "<group>"; };
+		FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dingCorrect.wav; sourceTree = "<group>"; };
+		FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boomIncorrect.wav; sourceTree = "<group>"; };
+		FAA4170E2A4CD15B00C43DDA /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
+		FAA417102A4CD56700C43DDA /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +89,7 @@
 				FAA107952A425F2F00703BF3 /* View */,
 				FAA107922A425EF900703BF3 /* App */,
 				FAA416F62A4A327A00C43DDA /* FontFiles */,
-				FAA417072A4CC94400C43DDA /* SoundManager */,
+				FAA417072A4CC94400C43DDA /* Sounds */,
 				FAA1078A2A425BED00703BF3 /* Preview Content */,
 			);
 			path = "Unpossible Quiz";
@@ -152,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA107A22A4395C200703BF3 /* UnpossibleQuiz.swift */,
+				FAA417102A4CD56700C43DDA /* GameOver.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -170,16 +179,19 @@
 			children = (
 				FAA416F82A4A385600C43DDA /* FlowLayout.swift */,
 				FAA416FF2A4A466E00C43DDA /* StringColorConverter.swift */,
+				FAA417082A4CC96100C43DDA /* SoundManger.swift */,
 			);
 			path = ThingsToAddToPackage;
 			sourceTree = "<group>";
 		};
-		FAA417072A4CC94400C43DDA /* SoundManager */ = {
+		FAA417072A4CC94400C43DDA /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				FAA417082A4CC96100C43DDA /* SoundManger.swift */,
+				FAA4170E2A4CD15B00C43DDA /* gameOver.wav */,
+				FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */,
+				FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */,
 			);
-			path = SoundManager;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,9 +259,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA107A82A43A28D00703BF3 /* DeliciousHandrawn-Regular.ttf in Resources */,
+				FAA4170B2A4CCEEB00C43DDA /* dingCorrect.wav in Resources */,
 				FAA1078C2A425BED00703BF3 /* Preview Assets.xcassets in Resources */,
+				FAA4170F2A4CD15B00C43DDA /* gameOver.wav in Resources */,
 				FAA107892A425BED00703BF3 /* Assets.xcassets in Resources */,
 				FAA107A72A43A0EF00703BF3 /* Unpossible-Quiz-Info.plist in Resources */,
+				FAA4170D2A4CD03500C43DDA /* boomIncorrect.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +278,7 @@
 				FAA1079E2A43935B00703BF3 /* Settings.swift in Sources */,
 				FAA416F92A4A385600C43DDA /* FlowLayout.swift in Sources */,
 				FAA107972A425F8B00703BF3 /* HomeScreen.swift in Sources */,
+				FAA417112A4CD56700C43DDA /* GameOver.swift in Sources */,
 				FAA417022A4A470200C43DDA /* Question.swift in Sources */,
 				FAA417002A4A466E00C43DDA /* StringColorConverter.swift in Sources */,
 				FAA416FD2A4A45B700C43DDA /* Answer.swift in Sources */,
