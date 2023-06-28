@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftui-navigation-router",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lukas-Simonson/SwiftUI-Navigation-Router",
+      "state" : {
+        "branch" : "main",
+        "revision" : "cd80d61dfc2868ebf2d264a13536ffdf46b1f07c"
+      }
+    }
+  ],
+  "version" : 2
+}
