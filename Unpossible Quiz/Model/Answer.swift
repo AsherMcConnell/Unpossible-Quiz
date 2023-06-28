@@ -10,4 +10,5 @@ import Foundation
 struct Answer: Hashable {
     var answerText: String
     var color: String
+    var correctAnswer: Bool
 }
