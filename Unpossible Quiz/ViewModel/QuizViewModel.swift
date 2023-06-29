@@ -63,11 +63,31 @@ class QuizViewModel: ObservableObject {
                      Answer(answerText: "This One", color: "blue", correctAnswer: true),
                      Answer(answerText: "This One", color: "yellow", correctAnswer: false),
                      Answer(answerText: "This One", color: "green", correctAnswer: false)]),
-        Question(questionText: "", answers: <#T##[Answer]#>)
+        Question(questionText: "Forwards I’m heavy but backwards I’m not. What am I?", answers:
+                    [Answer(answerText: "A  ton", color: "green", correctAnswer: true),
+                     Answer(answerText: "Heavy", color: "red", correctAnswer: false),
+                     Answer(answerText: "Backwards", color: "yellow", correctAnswer: false),
+                     Answer(answerText: "Forwards", color: "blue", correctAnswer: false)].shuffled()),
+        Question(questionText: "What question number are we on", answers:
+                    [Answer(answerText: "9", color: "red", correctAnswer: false),
+                     Answer(answerText: "11", color: "green", correctAnswer: false),
+                     Answer(answerText: "12", color: "yellow", correctAnswer: true),
+                     Answer(answerText: "10", color: "blue", correctAnswer: false)].shuffled()),
+        Question(questionText: "What is Bubba's real name?", answers:
+                    [Answer(answerText: "Bubbs", color: "red", correctAnswer: true),
+                     Answer(answerText: "Derek", color: "green", correctAnswer: false),
+                     Answer(answerText: "Mr.Hall", color: "blue", correctAnswer: false),
+                     Answer(answerText: "PuttPro435", color: "yellow", correctAnswer: false)].shuffled()),
+        Question(questionText: "dogBark", answers:
+                    [Answer(answerText: "woof woof", color: "red", correctAnswer: false),
+                     Answer(answerText: "woof woof woof", color: "green", correctAnswer: true),
+                     Answer(answerText: "WOOFFFF", color: "yellow", correctAnswer: false),
+                     Answer(answerText: "woof woof woof woof", color: "blue", correctAnswer: false)].shuffled())
+        
     ]
     
     func nextQuestion() {
-        if questionNum <= 8 {
+        if questionNum <= 12 {
             questionNum += 1
             currentQuestion = questionDataDefault[questionNum]
         }

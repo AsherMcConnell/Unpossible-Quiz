@@ -16,6 +16,7 @@ struct UnpossibleQuiz: View {
     @State var sliderColor: String = "red"
     
     @State var backgroundIsAnimating: Bool? = nil
+    @State var barkAnimation = false
     
     @NavRouter var navRouter
     
@@ -32,11 +33,6 @@ struct UnpossibleQuiz: View {
         ZStack {
             gameOver
                 .zIndex(10)
-//            VStack {
-//                questionCupNBall
-//                Spacer()
-//                lives
-//            }
                         VStack {
                             if quizVM.questionNum == 0 {
                                 questionIncorrectly
@@ -55,7 +51,14 @@ struct UnpossibleQuiz: View {
                             Spacer()
                             if quizVM.questionNum == 5 {
                             } else {
-                                lives
+                                HStack {
+                                    lives
+                                    Button {
+                                        quizVM.nextQuestion()
+                                    } label: {
+                                        Text("sgargkasog")
+                                    }
+                                }
                             }
                         }
                         .blur(radius: gameOverActive ? 10 : 0)
@@ -181,7 +184,6 @@ extension UnpossibleQuiz {
             Spacer()
         }.frame(height: 50)
     }
-    
     var gameOver: some View {
         ZStack {
             VStack {
@@ -197,7 +199,14 @@ extension UnpossibleQuiz {
                         navRouter.popToRoot()
                     }
             }
+            .rotationEffect(.degrees(gameOverActive ? 360 : 0))
             .animation(.spring(dampingFraction: 2.0 ,blendDuration: 20.0), value: gameOverActive)
+            
+        }
+    }
+    
+    var loseLifePopUp: some View {
+        ZStack {
             
         }
     }
@@ -344,6 +353,7 @@ extension UnpossibleQuiz {
                     }
                     bigCircle
                         .onTapGesture {
+                            SoundManager.instance.playSound(sound: .dingCorrect)
                             quizVM.nextQuestion()
                         }
                 }.padding(.horizontal, 10).padding(.top, 50)
@@ -592,12 +602,61 @@ extension UnpossibleQuiz {
     
     // MARK: - OTHER VIEWS
     
+    var dogWoof: some View {
+            HStack {
+                Image("dogBark")
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                ZStack {
+                    Text("WOOF")
+                        .font(.custom(Constants.drawFont, size: 58))
+                        .opacity(barkAnimation ? 1 : 0)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                barkAnimation.toggle()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                barkAnimation.toggle()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                barkAnimation.toggle()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                                barkAnimation.toggle()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                                barkAnimation.toggle()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+                                barkAnimation.toggle()
+                            }
+                        }
+                    VStack {
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(.black ,lineWidth: 10)
+                            .frame(width: 150, height: 100)
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 50, height: 10)
+                                .rotationEffect(.degrees(-45))
+                            Spacer()
+                        }
+                    }
+                }
+            }
+    }
+    
     var defaultQuestionTitle: some View {
         FlowLayout {
             numOfQuestion
-            ForEach(Array(zip(0..., quizVM.currentQuestion.questionText.components(separatedBy: " "))), id: \.0) { word in
-                Text(word.1 + " ")
+            if quizVM.questionNum == 13 {
+                dogWoof
+            } else {
+                ForEach(Array(zip(0..., quizVM.currentQuestion.questionText.components(separatedBy: " "))), id: \.0) { word in
+                    Text(word.1 + " ")
+                }
             }
+            
         }
         .foregroundColor(.black)
         .font(.custom(Constants.drawFont, size: Constants.fontSize))
