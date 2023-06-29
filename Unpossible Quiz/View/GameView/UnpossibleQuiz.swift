@@ -775,12 +775,16 @@ extension UnpossibleQuiz {
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                                 barkAnimation.toggle()
+                                SoundManager.instance.playSound(sound: .dogBark)
+
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                                 barkAnimation.toggle()
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                                 barkAnimation.toggle()
+                                SoundManager.instance.playSound(sound: .dogBark)
+
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
                                 barkAnimation.toggle()
