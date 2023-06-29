@@ -20,18 +20,28 @@ struct UnpossibleQuiz: View {
     
     @NavRouter var navRouter
     
+    @State var skipAnimate: Bool = false
+    @State var newSkipAnimate: Bool = false
+    
+    @State var lostLifeActive: Bool = false
     @State var gameOverActive: Bool = false
+    @State var victoryActive: Bool = false
     @State var positionX: CGFloat = -150
     @State var positionY: CGFloat = 0
     
-    @State var bluePositionX: CGFloat = -150
-    @State var bluePositionY: CGFloat = 0
+    @State var bluePositionX: CGFloat = -350
     
     @State var animation = true
     
     var body: some View {
         ZStack {
+            skipAdd
+                .zIndex(20)
             gameOver
+                .zIndex(5)
+            victoryScreen
+                .zIndex(5)
+            loseLifePopUp
                 .zIndex(10)
                         VStack {
                             if quizVM.questionNum == 0 {
@@ -42,6 +52,8 @@ struct UnpossibleQuiz: View {
                                 questionSlider
                             } else if quizVM.questionNum == 8 {
                                 questionCupNBall
+                            } else if quizVM.questionNum == 14 {
+                                questionCatchMe
                             } else {
                                 defaultQuestionTitle
                             }
@@ -52,16 +64,38 @@ struct UnpossibleQuiz: View {
                             if quizVM.questionNum == 5 {
                             } else {
                                 HStack {
-                                    lives
                                     Button {
                                         quizVM.nextQuestion()
                                     } label: {
-                                        Text("sgargkasog")
+                                        Text("sdfasdfg")
                                     }
+                                    lives
+                                    Button {
+                                        if !skipAnimate {
+                                            SoundManager.instance.playSound(sound: .dingCorrect)
+                                            skipAnimate.toggle()
+                                            quizVM.nextQuestion()
+                                        }
+                                    } label: {
+                                        ZStack {
+                                            Image(systemName: "arrow.forward")
+                                                .resizable()
+                                                .frame(width: 85, height: 65)
+                                                .foregroundColor(.black)
+                                            Image(systemName: "arrow.forward")
+                                                .resizable()
+                                                .frame(width: 70, height: 65)
+                                                .foregroundColor(Color("red"))
+                                        }
+                                        .offset(x: skipAnimate ? 800 : 0)
+                                        .animation(.easeIn(duration: 1.0), value: skipAnimate)
+                                    }
+                                    .padding(.trailing, 80)
+                                    
                                 }
                             }
                         }
-                        .blur(radius: gameOverActive ? 10 : 0)
+                        .blur(radius: gameOverActive || victoryActive ? 10 : 0)
                         .animation(.linear(duration: 0.7), value: gameOverActive)
         }
     }
@@ -88,8 +122,10 @@ extension UnpossibleQuiz {
         
         // MARK: - questionRainbow
         
-        static let questionRainbowButtonText = "W"
-        static let questionRainbowBodyText = "hat will you find at the end of a rainbow?"
+        static let questionRainbowBodyText = "What will you find at the end of a rainbo"
+        static let questionRainbowButtonText = "w"
+        
+        static let questionRainbowEndText = "?"
         
         // MARK: - Answers
         
@@ -157,6 +193,7 @@ extension UnpossibleQuiz {
 // MARK: VIEWS
 
 extension UnpossibleQuiz {
+    
     var numOfQuestion: some View {
         ZStack {
             Text("\(quizVM.questionNum + 1).")
@@ -171,7 +208,6 @@ extension UnpossibleQuiz {
         .padding(.trailing, 15)
         .foregroundColor(Color("darkRed"))
     }
-    
     var lives: some View {
         HStack {
             Image(Constants.livesTitleArray[quizVM.lives])
@@ -204,9 +240,42 @@ extension UnpossibleQuiz {
             
         }
     }
-    
     var loseLifePopUp: some View {
         ZStack {
+            Image("lostLife")
+                .resizable()
+                .frame(width: 250, height: 300)
+                .offset(x: lostLifeActive ? -420 : 340)
+                .animation(.easeInOut(duration: 2.5), value: lostLifeActive)
+            
+        }
+    }
+    var skipAdd: some View {
+        ZStack {
+            Circle()
+                .frame(width: 300)
+                .foregroundColor(Color("green"))
+            Text("+1 SKIP")
+                .font(.custom(Constants.drawFont, size: 50))
+        }
+        .opacity(newSkipAnimate ? 1 : 0)
+        
+    }
+    var victoryScreen: some View {
+        ZStack {
+            VStack {
+                Image("victory")
+                    .resizable()
+                    .frame(width: victoryActive ? 300 : 0, height: victoryActive ? 400 : 0)
+                Image("home")
+                    .resizable()
+                    .frame(width:victoryActive ? 130 : 0, height: victoryActive ? 200 : 0)
+                    .onTapGesture {
+                        navRouter.popToRoot()
+                    }
+            }
+            .rotationEffect(.degrees(victoryActive ? 360 : 0))
+            .animation(.spring(dampingFraction: 2.0 ,blendDuration: 20.0), value: victoryActive)
             
         }
     }
@@ -238,13 +307,16 @@ extension UnpossibleQuiz {
     var questionRainbow: some View {
         FlowLayout {
             numOfQuestion
+            ForEach(Array(zip(0..., Constants.questionRainbowBodyText.components(separatedBy: " "))), id: \.0) { word in
+                Text(word.1 + "")
+            }
             Button {
                 SoundManager.instance.playSound(sound: .dingCorrect)
                 quizVM.nextQuestion()
             } label: {
                 Text(Constants.questionRainbowButtonText)
             }
-            ForEach(Array(zip(0..., Constants.questionRainbowBodyText.components(separatedBy: " "))), id: \.0) { word in
+            ForEach(Array(zip(0..., Constants.questionRainbowEndText.components(separatedBy: " "))), id: \.0) { word in
                 Text(word.1 + " ")
             }
         }
@@ -302,12 +374,68 @@ extension UnpossibleQuiz {
                     Image(Constants.livesArray[quizVM.lives])
                         .resizable()
                         .frame(width: 40, height: 45)
-                    Text("")
+                    Text("NO SKIPPING")
                         .frame(width: 200)
+                        .font(.custom(Constants.drawFont, size: 40))
+                    
                     
                     
                 }
             }
+        }
+    }
+    
+    
+    var questionCatchMe: some View {
+        VStack {
+            FlowLayout {
+                numOfQuestion
+                    .foregroundColor(.white)
+                ForEach(Array(zip(0..., quizVM.currentQuestion.questionText.components(separatedBy: " "))), id: \.0) { word in
+                    Text(word.1 + " ")
+                }
+                .foregroundColor(.black)
+                .font(.custom(Constants.drawFont, size: Constants.fontSize))
+        }
+            ZStack {
+                Circle()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.black)
+                    .opacity(0.5)
+                    .zIndex(-10)
+                    .offset(y: 300)
+                    .onTapGesture {
+                        if quizVM.lives == 2 {
+                            gameOverActive.toggle()
+                            SoundManager.instance.playSound(sound: .gameOver)
+                        } else if quizVM.lives <= 1 {
+                            SoundManager.instance.playSound(sound: .boomIncorrect)
+                            quizVM.lives += 1
+                        } else {
+                            SoundManager.instance.playSound(sound: .dingCorrect)
+                            quizVM.nextQuestion()
+                        }
+                    }
+                    
+            Circle()
+                .frame(width: 60, height: 60)
+                .foregroundColor(Color("red"))
+                .offset(x: bluePositionX, y: 300)
+                .animation(.linear(duration: 0.6).repeatForever(autoreverses: true))
+                .onTapGesture {
+                    
+                    victoryActive.toggle()
+                }
+                .onAppear {
+                    withAnimation(.linear(duration: 0.5)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            bluePositionX += 800
+                            
+                        }
+                    }
+                        
+                    }
+                }
         }
     }
     
@@ -353,8 +481,20 @@ extension UnpossibleQuiz {
                     }
                     bigCircle
                         .onTapGesture {
+                            
                             SoundManager.instance.playSound(sound: .dingCorrect)
-                            quizVM.nextQuestion()
+                            
+                            if skipAnimate {
+                                newSkipAnimate.toggle()
+                                skipAnimate.toggle()
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                quizVM.nextQuestion()
+                                if skipAnimate {
+                                    newSkipAnimate.toggle()
+                                }
+                            }
                         }
                 }.padding(.horizontal, 10).padding(.top, 50)
                 rowOfBalls
@@ -403,7 +543,7 @@ extension UnpossibleQuiz {
             .frame(width: 40, height: 40)
             .foregroundColor(Color("red"))
             .offset(x: positionX, y: positionY)
-            .animation(.linear(duration: 0.1))
+            .animation(.linear(duration: 0.3))
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     positionX += 300
@@ -427,27 +567,27 @@ extension UnpossibleQuiz {
                     animation.toggle()
 
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6.5) {
                     positionY -= 450
                     animation.toggle()
 
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
                     positionX += 150
 
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.4) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7.4) {
                     positionX += 150
                     positionY += 150
                     animation.toggle()
 
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7.8) {
                     positionX -= 300
 
 
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.8) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 8.2) {
                     positionX += 300
                     positionY += 150
                     animation.toggle()
@@ -679,7 +819,6 @@ extension UnpossibleQuiz {
                                 .shadow(radius: 10)
                                 .zIndex(-1)
                         }
-                        
                     } else {
                         Text(answer.answerText)
                             .foregroundColor(.white)
@@ -698,6 +837,7 @@ extension UnpossibleQuiz {
                         SoundManager.instance.playSound(sound: .gameOver)
                     } else if !answer.correctAnswer && quizVM.lives <= 1 {
                         SoundManager.instance.playSound(sound: .boomIncorrect)
+                        lostLifeActive.toggle()
                         quizVM.lives += 1
                     } else {
                         SoundManager.instance.playSound(sound: .dingCorrect)

@@ -82,12 +82,13 @@ class QuizViewModel: ObservableObject {
                     [Answer(answerText: "woof woof", color: "red", correctAnswer: false),
                      Answer(answerText: "woof woof woof", color: "green", correctAnswer: true),
                      Answer(answerText: "WOOFFFF", color: "yellow", correctAnswer: false),
-                     Answer(answerText: "woof woof woof woof", color: "blue", correctAnswer: false)].shuffled())
+                     Answer(answerText: "woof woof woof woof", color: "blue", correctAnswer: false)].shuffled()),
+        Question(questionText: "CATCH ME!", answers: [])
         
     ]
     
     func nextQuestion() {
-        if questionNum <= 12 {
+        if questionNum <= 13 {
             questionNum += 1
             currentQuestion = questionDataDefault[questionNum]
         }
