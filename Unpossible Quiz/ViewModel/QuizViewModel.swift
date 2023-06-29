@@ -12,7 +12,7 @@ class QuizViewModel: ObservableObject {
     @Published var questionNum = 0
     @Published var lives = 0
     @Published var currentQuestion: Question
-    
+        
     init() {
         self.currentQuestion = questionDataDefault[0]
     }
@@ -93,5 +93,4 @@ class QuizViewModel: ObservableObject {
             currentQuestion = questionDataDefault[questionNum]
         }
     }
-    
 }

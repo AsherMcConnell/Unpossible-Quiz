@@ -15,15 +15,18 @@ struct HomeScreen: View {
     @NavRouter var navRouter
     @State var backgroundIsAnimating: Bool? = nil
     
+//    var highscore = UserDefaults.standard.integer(forKey: "HIGHSCORE")
+
+    
     var body: some View {
         ZStack {
                 backgroundAnimation
             VStack {
                 Spacer()
                 title
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 100)
                 
-                highScore
+//                highScore
                 startCreditsSettings
                 Spacer()
             }
@@ -90,15 +93,40 @@ extension HomeScreen {
     }
     
     var startCreditsSettings: some View {
-        VStack {
-            buttonOnHomeScreen(color: "yellow", image: "start") {
-                navRouter.push(UnpossibleQuiz())
+        ZStack {
+            ZStack {
+                Text("COMING SOON")
+                    .font(.custom(Constants.drawingFont, size: 30))
+                    .zIndex(5)
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.brown)
+                    .frame(width: 150, height: 90)
             }
-            buttonOnHomeScreen(color: "red", image: "settings") {
-                navRouter.push(Settings())
-            }
-            buttonOnHomeScreen(color: "blue", image: "credits") {
-                navRouter.push(Credits())
+            .padding(.top, 100)
+            .zIndex(10)
+            VStack {
+                buttonOnHomeScreen(color: "yellow", image: "start") {
+                    navRouter.push(UnpossibleQuiz())
+                    SoundManager.instance.playSound(sound: .click)
+                }
+                ZStack {
+                    Image("dangerTape")
+                        .resizable()
+                        .frame(width: 250, height: 90)
+                        .zIndex(5)
+                    buttonOnHomeScreen(color: "red", image: "settings") {
+//                        navRouter.push(Settings())
+                    }
+                }
+                ZStack {
+                    Image("dangerTape")
+                        .resizable()
+                        .frame(width: 250, height: 90)
+                        .zIndex(5)
+                    buttonOnHomeScreen(color: "blue", image: "credits") {
+//                        navRouter.push(Credits())
+                    }
+                }
             }
         }
     }

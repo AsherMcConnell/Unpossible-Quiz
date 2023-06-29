@@ -18,6 +18,8 @@ class SoundManager {
         case gameOver
         case boomIncorrect
         case dingCorrect
+        case victory
+        case click
     }
     
     func playSound(sound: SoundOption) {

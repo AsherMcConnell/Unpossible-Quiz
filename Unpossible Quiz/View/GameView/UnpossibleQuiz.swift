@@ -64,11 +64,11 @@ struct UnpossibleQuiz: View {
                             if quizVM.questionNum == 5 {
                             } else {
                                 HStack {
-                                    Button {
-                                        quizVM.nextQuestion()
-                                    } label: {
-                                        Text("sdfasdfg")
-                                    }
+//                                    Button {
+//                                        quizVM.nextQuestion()
+//                                    } label: {
+//                                        Text("sdfasdfg")
+//                                    }
                                     lives
                                     Button {
                                         if !skipAnimate {
@@ -196,8 +196,13 @@ extension UnpossibleQuiz {
     
     var numOfQuestion: some View {
         ZStack {
-            Text("\(quizVM.questionNum + 1).")
-                .font(.custom(Constants.drawFont, size: Constants.fontSize))
+            if quizVM.questionNum == 11 {
+                Text("?")
+                    .font(.custom(Constants.drawFont, size: 20))
+            } else {
+                Text("\(quizVM.questionNum + 1).")
+                    .font(.custom(Constants.drawFont, size: Constants.fontSize))
+            }
             
             Circle()
                 .stroke(lineWidth: 4)
@@ -232,6 +237,7 @@ extension UnpossibleQuiz {
                     .frame(width:gameOverActive ? 130 : 0, height: gameOverActive ? 200 : 0)
                     .rotationEffect(.degrees(-90))
                     .onTapGesture {
+                        SoundManager.instance.playSound(sound: .click)
                         navRouter.popToRoot()
                     }
             }
@@ -266,11 +272,12 @@ extension UnpossibleQuiz {
             VStack {
                 Image("victory")
                     .resizable()
-                    .frame(width: victoryActive ? 300 : 0, height: victoryActive ? 400 : 0)
+                    .frame(width: victoryActive ? 350 : 0, height: victoryActive ? 200 : 0)
                 Image("home")
                     .resizable()
-                    .frame(width:victoryActive ? 130 : 0, height: victoryActive ? 200 : 0)
+                    .frame(width:victoryActive ? 200 : 0, height: victoryActive ? 130 : 0)
                     .onTapGesture {
+                        SoundManager.instance.playSound(sound: .click)
                         navRouter.popToRoot()
                     }
             }
@@ -384,8 +391,6 @@ extension UnpossibleQuiz {
             }
         }
     }
-    
-    
     var questionCatchMe: some View {
         VStack {
             FlowLayout {
@@ -400,7 +405,7 @@ extension UnpossibleQuiz {
             ZStack {
                 Circle()
                     .frame(width: 100, height: 100)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("green"))
                     .opacity(0.5)
                     .zIndex(-10)
                     .offset(y: 300)
@@ -423,11 +428,11 @@ extension UnpossibleQuiz {
                 .offset(x: bluePositionX, y: 300)
                 .animation(.linear(duration: 0.6).repeatForever(autoreverses: true))
                 .onTapGesture {
-                    
+                    SoundManager.instance.playSound(sound: .victory)
                     victoryActive.toggle()
                 }
                 .onAppear {
-                    withAnimation(.linear(duration: 0.5)) {
+                    withAnimation(.linear(duration: 0.8)) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             bluePositionX += 800
                             
@@ -490,10 +495,10 @@ extension UnpossibleQuiz {
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                quizVM.nextQuestion()
-                                if skipAnimate {
+                                if newSkipAnimate {
                                     newSkipAnimate.toggle()
                                 }
+                                quizVM.nextQuestion()
                             }
                         }
                 }.padding(.horizontal, 10).padding(.top, 50)
@@ -868,5 +873,6 @@ extension UnpossibleQuiz {
             }
         }
 }
+
 
 

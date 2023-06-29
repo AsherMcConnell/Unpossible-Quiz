@@ -27,6 +27,8 @@
 		FAA4170D2A4CD03500C43DDA /* boomIncorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */; };
 		FAA4170F2A4CD15B00C43DDA /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170E2A4CD15B00C43DDA /* gameOver.wav */; };
 		FAA417142A4D184E00C43DDA /* AnimationSequence in Frameworks */ = {isa = PBXBuildFile; productRef = FAA417132A4D184E00C43DDA /* AnimationSequence */; };
+		FAA417162A4D6E4A00C43DDA /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA417152A4D6E4A00C43DDA /* victory.wav */; };
+		FAA4171A2A4D79E800C43DDA /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA417192A4D79E800C43DDA /* click.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dingCorrect.wav; sourceTree = "<group>"; };
 		FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boomIncorrect.wav; sourceTree = "<group>"; };
 		FAA4170E2A4CD15B00C43DDA /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
+		FAA417152A4D6E4A00C43DDA /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
+		FAA417192A4D79E800C43DDA /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 		FAA417072A4CC94400C43DDA /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FAA417192A4D79E800C43DDA /* click.wav */,
+				FAA417152A4D6E4A00C43DDA /* victory.wav */,
 				FAA4170E2A4CD15B00C43DDA /* gameOver.wav */,
 				FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */,
 				FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */,
@@ -259,7 +265,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA4171A2A4D79E800C43DDA /* click.wav in Resources */,
 				FAA107A82A43A28D00703BF3 /* DeliciousHandrawn-Regular.ttf in Resources */,
+				FAA417162A4D6E4A00C43DDA /* victory.wav in Resources */,
 				FAA4170B2A4CCEEB00C43DDA /* dingCorrect.wav in Resources */,
 				FAA1078C2A425BED00703BF3 /* Preview Assets.xcassets in Resources */,
 				FAA4170F2A4CD15B00C43DDA /* gameOver.wav in Resources */,
