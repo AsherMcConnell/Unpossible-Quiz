@@ -109,6 +109,7 @@ extension HomeScreen {
                 .font(.custom(Constants.drawingFont, size: Constants.highScoreFontSize))
         }
     }
+    
     var backgroundAnimation: some View {
             VStack {
                 ForEach(0..<40) { color in

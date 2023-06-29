@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "animationsequence",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cristhianleonli/AnimationSequence",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6e33fbc27324f3d2a8669c59e4207e248211c666"
+      }
+    },
+    {
       "identity" : "swiftui-navigation-router",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Lukas-Simonson/SwiftUI-Navigation-Router",

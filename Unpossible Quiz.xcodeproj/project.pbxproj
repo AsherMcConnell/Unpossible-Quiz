@@ -26,7 +26,7 @@
 		FAA4170B2A4CCEEB00C43DDA /* dingCorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */; };
 		FAA4170D2A4CD03500C43DDA /* boomIncorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */; };
 		FAA4170F2A4CD15B00C43DDA /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4170E2A4CD15B00C43DDA /* gameOver.wav */; };
-		FAA417112A4CD56700C43DDA /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA417102A4CD56700C43DDA /* GameOver.swift */; };
+		FAA417142A4D184E00C43DDA /* AnimationSequence in Frameworks */ = {isa = PBXBuildFile; productRef = FAA417132A4D184E00C43DDA /* AnimationSequence */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +49,6 @@
 		FAA4170A2A4CCEEB00C43DDA /* dingCorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dingCorrect.wav; sourceTree = "<group>"; };
 		FAA4170C2A4CD03500C43DDA /* boomIncorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boomIncorrect.wav; sourceTree = "<group>"; };
 		FAA4170E2A4CD15B00C43DDA /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
-		FAA417102A4CD56700C43DDA /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA417142A4D184E00C43DDA /* AnimationSequence in Frameworks */,
 				FAA1079A2A425FEE00703BF3 /* NavigationRouter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				FAA107A22A4395C200703BF3 /* UnpossibleQuiz.swift */,
-				FAA417102A4CD56700C43DDA /* GameOver.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -212,6 +211,7 @@
 			name = "Unpossible Quiz";
 			packageProductDependencies = (
 				FAA107992A425FEE00703BF3 /* NavigationRouter */,
+				FAA417132A4D184E00C43DDA /* AnimationSequence */,
 			);
 			productName = "Unpossible Quiz";
 			productReference = FAA107812A425BEB00703BF3 /* Unpossible Quiz.app */;
@@ -243,6 +243,7 @@
 			mainGroup = FAA107782A425BEB00703BF3;
 			packageReferences = (
 				FAA107982A425FEE00703BF3 /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */,
+				FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */,
 			);
 			productRefGroup = FAA107822A425BEB00703BF3 /* Products */;
 			projectDirPath = "";
@@ -278,7 +279,6 @@
 				FAA1079E2A43935B00703BF3 /* Settings.swift in Sources */,
 				FAA416F92A4A385600C43DDA /* FlowLayout.swift in Sources */,
 				FAA107972A425F8B00703BF3 /* HomeScreen.swift in Sources */,
-				FAA417112A4CD56700C43DDA /* GameOver.swift in Sources */,
 				FAA417022A4A470200C43DDA /* Question.swift in Sources */,
 				FAA417002A4A466E00C43DDA /* StringColorConverter.swift in Sources */,
 				FAA416FD2A4A45B700C43DDA /* Answer.swift in Sources */,
@@ -497,6 +497,14 @@
 				kind = branch;
 			};
 		};
+		FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cristhianleonli/AnimationSequence";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -504,6 +512,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAA107982A425FEE00703BF3 /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */;
 			productName = NavigationRouter;
+		};
+		FAA417132A4D184E00C43DDA /* AnimationSequence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */;
+			productName = AnimationSequence;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
