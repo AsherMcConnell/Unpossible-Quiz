@@ -12,8 +12,16 @@ struct HomeScreen: View {
     
     @StateObject var quizVM = QuizViewModel()
     
+    @AppStorage("highScore") var savedHighScore = 0
+    
     @NavRouter var navRouter
     @State var backgroundIsAnimating: Bool? = nil
+    
+    @State var rocketAnimating: Bool = false
+    
+//    var highscore = UserDefaults.standard.integer(forKey: "HIGHSCORE")
+
+    @Namespace private var nameSpace
     
     var body: some View {
         ZStack {
@@ -21,8 +29,8 @@ struct HomeScreen: View {
             VStack {
                 Spacer()
                 title
-                    .padding(.bottom, 50)
-                
+                    .padding(.bottom, 100)
+                            
                 highScore
                 startCreditsSettings
                 Spacer()
@@ -90,25 +98,54 @@ extension HomeScreen {
     }
     
     var startCreditsSettings: some View {
-        VStack {
-            buttonOnHomeScreen(color: "yellow", image: "start") {
-                navRouter.push(UnpossibleQuiz())
+        ZStack {
+            ZStack {
+                Text("COMING SOON")
+                    .font(.custom(Constants.drawingFont, size: 30))
+                    .zIndex(5)
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.brown)
+                    .frame(width: 150, height: 90)
             }
-            buttonOnHomeScreen(color: "red", image: "settings") {
-                navRouter.push(Settings())
-            }
-            buttonOnHomeScreen(color: "blue", image: "credits") {
-                navRouter.push(Credits())
+            .padding(.top, 100)
+            .zIndex(10)
+            VStack {
+                buttonOnHomeScreen(color: "yellow", image: "start") {
+                    navRouter.push(UnpossibleQuiz(quizVM: quizVM))
+                    SoundManager.instance.playSound(sound: .click)
+                }
+                ZStack {
+                    Image("dangerTape")
+                        .resizable()
+                        .frame(width: 250, height: 90)
+                        .zIndex(5)
+                    buttonOnHomeScreen(color: "red", image: "settings") {
+//                        navRouter.push(Settings())
+                    }
+                }
+                ZStack {
+                    Image("dangerTape")
+                        .resizable()
+                        .frame(width: 250, height: 90)
+                        .zIndex(5)
+                    buttonOnHomeScreen(color: "blue", image: "credits") {
+//                        navRouter.push(Credits())
+                    }
+                }
             }
         }
     }
     
     var highScore: some View {
         HStack {
-            Text("High Score: 0")
+            Text("High Score: \(savedHighScore + 2)")
                 .font(.custom(Constants.drawingFont, size: Constants.highScoreFontSize))
+                .onChange(of: quizVM.highScore) { newValue in
+                    savedHighScore = newValue
+                }
         }
     }
+    
     var backgroundAnimation: some View {
             VStack {
                 ForEach(0..<40) { color in
