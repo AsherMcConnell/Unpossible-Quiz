@@ -29,6 +29,8 @@
 		FAA417142A4D184E00C43DDA /* AnimationSequence in Frameworks */ = {isa = PBXBuildFile; productRef = FAA417132A4D184E00C43DDA /* AnimationSequence */; };
 		FAA417162A4D6E4A00C43DDA /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA417152A4D6E4A00C43DDA /* victory.wav */; };
 		FAA4171A2A4D79E800C43DDA /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA417192A4D79E800C43DDA /* click.wav */; };
+		FAA4171C2A4E11A500C43DDA /* dogBark.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4171B2A4E11A500C43DDA /* dogBark.wav */; };
+		FAA4171E2A4E244D00C43DDA /* RocketShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4171D2A4E244D00C43DDA /* RocketShip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		FAA4170E2A4CD15B00C43DDA /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameOver.wav; sourceTree = "<group>"; };
 		FAA417152A4D6E4A00C43DDA /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
 		FAA417192A4D79E800C43DDA /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		FAA4171B2A4E11A500C43DDA /* dogBark.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dogBark.wav; sourceTree = "<group>"; };
+		FAA4171D2A4E244D00C43DDA /* RocketShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketShip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			children = (
 				FAA416FC2A4A45B700C43DDA /* Answer.swift */,
 				FAA417012A4A470200C43DDA /* Question.swift */,
+				FAA4171D2A4E244D00C43DDA /* RocketShip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 		FAA417072A4CC94400C43DDA /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FAA4171B2A4E11A500C43DDA /* dogBark.wav */,
 				FAA417192A4D79E800C43DDA /* click.wav */,
 				FAA417152A4D6E4A00C43DDA /* victory.wav */,
 				FAA4170E2A4CD15B00C43DDA /* gameOver.wav */,
@@ -265,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA4171C2A4E11A500C43DDA /* dogBark.wav in Resources */,
 				FAA4171A2A4D79E800C43DDA /* click.wav in Resources */,
 				FAA107A82A43A28D00703BF3 /* DeliciousHandrawn-Regular.ttf in Resources */,
 				FAA417162A4D6E4A00C43DDA /* victory.wav in Resources */,
@@ -295,6 +302,7 @@
 				FAA107852A425BEB00703BF3 /* Unpossible_QuizApp.swift in Sources */,
 				FAA107A32A4395C200703BF3 /* UnpossibleQuiz.swift in Sources */,
 				FAA417042A4A47A900C43DDA /* QuizViewModel.swift in Sources */,
+				FAA4171E2A4E244D00C43DDA /* RocketShip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +439,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,6 +469,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -20,6 +20,7 @@ class SoundManager {
         case dingCorrect
         case victory
         case click
+        case dogBark
     }
     
     func playSound(sound: SoundOption) {

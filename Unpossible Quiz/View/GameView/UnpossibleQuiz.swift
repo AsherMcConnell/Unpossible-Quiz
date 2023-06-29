@@ -11,7 +11,8 @@ import AnimationSequence
 
 struct UnpossibleQuiz: View {
     
-    @ObservedObject var quizVM = QuizViewModel()
+    @ObservedObject var quizVM: QuizViewModel
+    
     @State var sliderValue: Double = 0
     @State var sliderColor: String = "red"
     
@@ -35,6 +36,11 @@ struct UnpossibleQuiz: View {
     
     var body: some View {
         ZStack {
+            
+//                Ro
+//                    .foregroundColor(.clear)
+//                    .frame(width: 450, height: 800)
+            
             skipAdd
                 .zIndex(20)
             gameOver
@@ -101,12 +107,12 @@ struct UnpossibleQuiz: View {
     }
 }
 
-
-struct UnpossibleQuiz_Previews: PreviewProvider {
-    static var previews: some View {
-        UnpossibleQuiz()
-    }
-}
+//
+//struct UnpossibleQuiz_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UnpossibleQuiz()
+//    }
+//}
 
 // MARK: CONSTANTS
 
@@ -239,6 +245,8 @@ extension UnpossibleQuiz {
                     .onTapGesture {
                         SoundManager.instance.playSound(sound: .click)
                         navRouter.popToRoot()
+                        
+                        quizVM.reset()
                     }
             }
             .rotationEffect(.degrees(gameOverActive ? 360 : 0))
@@ -279,6 +287,7 @@ extension UnpossibleQuiz {
                     .onTapGesture {
                         SoundManager.instance.playSound(sound: .click)
                         navRouter.popToRoot()
+                        quizVM.reset()
                     }
             }
             .rotationEffect(.degrees(victoryActive ? 360 : 0))
@@ -426,7 +435,7 @@ extension UnpossibleQuiz {
                 .frame(width: 60, height: 60)
                 .foregroundColor(Color("red"))
                 .offset(x: bluePositionX, y: 300)
-                .animation(.linear(duration: 0.6).repeatForever(autoreverses: true))
+                .animation(.linear(duration: 0.8).repeatForever(autoreverses: true))
                 .onTapGesture {
                     SoundManager.instance.playSound(sound: .victory)
                     victoryActive.toggle()
@@ -759,6 +768,7 @@ extension UnpossibleQuiz {
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 barkAnimation.toggle()
+                                SoundManager.instance.playSound(sound: .dogBark)
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                                 barkAnimation.toggle()

@@ -12,11 +12,16 @@ struct HomeScreen: View {
     
     @StateObject var quizVM = QuizViewModel()
     
+    @AppStorage("highScore") var savedHighScore = 0
+    
     @NavRouter var navRouter
     @State var backgroundIsAnimating: Bool? = nil
     
+    @State var rocketAnimating: Bool = false
+    
 //    var highscore = UserDefaults.standard.integer(forKey: "HIGHSCORE")
 
+    @Namespace private var nameSpace
     
     var body: some View {
         ZStack {
@@ -25,8 +30,8 @@ struct HomeScreen: View {
                 Spacer()
                 title
                     .padding(.bottom, 100)
-                
-//                highScore
+                            
+                highScore
                 startCreditsSettings
                 Spacer()
             }
@@ -106,7 +111,7 @@ extension HomeScreen {
             .zIndex(10)
             VStack {
                 buttonOnHomeScreen(color: "yellow", image: "start") {
-                    navRouter.push(UnpossibleQuiz())
+                    navRouter.push(UnpossibleQuiz(quizVM: quizVM))
                     SoundManager.instance.playSound(sound: .click)
                 }
                 ZStack {
@@ -133,8 +138,11 @@ extension HomeScreen {
     
     var highScore: some View {
         HStack {
-            Text("High Score: 0")
+            Text("High Score: \(savedHighScore + 2)")
                 .font(.custom(Constants.drawingFont, size: Constants.highScoreFontSize))
+                .onChange(of: quizVM.highScore) { newValue in
+                    savedHighScore = newValue
+                }
         }
     }
     

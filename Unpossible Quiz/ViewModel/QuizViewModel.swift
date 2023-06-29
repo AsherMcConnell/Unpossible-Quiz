@@ -12,6 +12,8 @@ class QuizViewModel: ObservableObject {
     @Published var questionNum = 0
     @Published var lives = 0
     @Published var currentQuestion: Question
+    
+    var highScore = 0
         
     init() {
         self.currentQuestion = questionDataDefault[0]
@@ -88,9 +90,20 @@ class QuizViewModel: ObservableObject {
     ]
     
     func nextQuestion() {
+        if questionNum > highScore {
+            highScore = questionNum
+        }
         if questionNum <= 13 {
             questionNum += 1
             currentQuestion = questionDataDefault[questionNum]
+            
+            
         }
+    }
+    
+    func reset() {
+        currentQuestion = questionDataDefault[0]
+        lives = 0
+        questionNum = 0
     }
 }
