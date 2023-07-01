@@ -14,7 +14,8 @@ struct Unpossible_QuizApp: App {
         WindowGroup {
             NavigationRouter {
                 HomeScreen()
-                    .navigatesTo(UnpossibleQuiz.self, usesBackButton: false, usesBackSwipe: false)
+//                    .navigatesTo(UnpossibleQuiz.self, usesBackButton: false, usesBackSwipe: false)
+                    .navigatesTo(UnpossibleQuiz.self, backButtonDisabled: true, backSwipeDisabled: true)
                     .navigatesTo(Settings.self)
                     .navigatesTo(Credits.self)
             }
