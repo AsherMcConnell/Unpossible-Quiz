@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Lukas-Simonson/SwiftUI-Navigation-Router",
       "state" : {
-        "branch" : "main",
-        "revision" : "cd80d61dfc2868ebf2d264a13536ffdf46b1f07c"
+        "branch" : "dev",
+        "revision" : "98a4e9802addef92c7ebd2413ed27afdce9f2fe3"
       }
     }
   ],

@@ -11,7 +11,6 @@
 		FAA107892A425BED00703BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA107882A425BED00703BF3 /* Assets.xcassets */; };
 		FAA1078C2A425BED00703BF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA1078B2A425BED00703BF3 /* Preview Assets.xcassets */; };
 		FAA107972A425F8B00703BF3 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA107962A425F8B00703BF3 /* HomeScreen.swift */; };
-		FAA1079A2A425FEE00703BF3 /* NavigationRouter in Frameworks */ = {isa = PBXBuildFile; productRef = FAA107992A425FEE00703BF3 /* NavigationRouter */; };
 		FAA1079E2A43935B00703BF3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1079D2A43935B00703BF3 /* Settings.swift */; };
 		FAA107A02A43957F00703BF3 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1079F2A43957F00703BF3 /* Credits.swift */; };
 		FAA107A32A4395C200703BF3 /* UnpossibleQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA107A22A4395C200703BF3 /* UnpossibleQuiz.swift */; };
@@ -31,6 +30,7 @@
 		FAA4171A2A4D79E800C43DDA /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA417192A4D79E800C43DDA /* click.wav */; };
 		FAA4171C2A4E11A500C43DDA /* dogBark.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA4171B2A4E11A500C43DDA /* dogBark.wav */; };
 		FAA4171E2A4E244D00C43DDA /* RocketShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4171D2A4E244D00C43DDA /* RocketShip.swift */; };
+		FAA4172F2A4E370F00C43DDA /* NavigationRouter in Frameworks */ = {isa = PBXBuildFile; productRef = FAA4172E2A4E370F00C43DDA /* NavigationRouter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA417142A4D184E00C43DDA /* AnimationSequence in Frameworks */,
-				FAA1079A2A425FEE00703BF3 /* NavigationRouter in Frameworks */,
+				FAA4172F2A4E370F00C43DDA /* NavigationRouter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,8 +222,8 @@
 			);
 			name = "Unpossible Quiz";
 			packageProductDependencies = (
-				FAA107992A425FEE00703BF3 /* NavigationRouter */,
 				FAA417132A4D184E00C43DDA /* AnimationSequence */,
+				FAA4172E2A4E370F00C43DDA /* NavigationRouter */,
 			);
 			productName = "Unpossible Quiz";
 			productReference = FAA107812A425BEB00703BF3 /* Unpossible Quiz.app */;
@@ -254,8 +254,8 @@
 			);
 			mainGroup = FAA107782A425BEB00703BF3;
 			packageReferences = (
-				FAA107982A425FEE00703BF3 /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */,
 				FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */,
+				FAA4172D2A4E370F00C43DDA /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */,
 			);
 			productRefGroup = FAA107822A425BEB00703BF3 /* Products */;
 			projectDirPath = "";
@@ -507,14 +507,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FAA107982A425FEE00703BF3 /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Lukas-Simonson/SwiftUI-Navigation-Router";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cristhianleonli/AnimationSequence";
@@ -523,18 +515,26 @@
 				kind = branch;
 			};
 		};
+		FAA4172D2A4E370F00C43DDA /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Lukas-Simonson/SwiftUI-Navigation-Router";
+			requirement = {
+				branch = dev;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FAA107992A425FEE00703BF3 /* NavigationRouter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAA107982A425FEE00703BF3 /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */;
-			productName = NavigationRouter;
-		};
 		FAA417132A4D184E00C43DDA /* AnimationSequence */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAA417122A4D184E00C43DDA /* XCRemoteSwiftPackageReference "AnimationSequence" */;
 			productName = AnimationSequence;
+		};
+		FAA4172E2A4E370F00C43DDA /* NavigationRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAA4172D2A4E370F00C43DDA /* XCRemoteSwiftPackageReference "SwiftUI-Navigation-Router" */;
+			productName = NavigationRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
