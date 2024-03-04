@@ -38,11 +38,14 @@ struct HomeScreen: View {
            
         }
         .onAppear {
-            withAnimation {
-                if backgroundIsAnimating == nil {
-                    backgroundIsAnimating = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation {
+                    if backgroundIsAnimating == nil {
+                        backgroundIsAnimating = false
+                    }
                 }
             }
+           
         }
     }
 }
